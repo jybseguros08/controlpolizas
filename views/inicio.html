@@ -3,6 +3,17 @@
 {% block contenido %}
 <div class="contenedor">
 
+    {% if mensaje %}
+    <div class="aviso-exito">{{ mensaje }}</div>
+    {% endif %}
+
+    <!-- Barra de acciones: los 3 botones -->
+    <div class="barra-acciones">
+        <a href="{{ url_for('polizas.generar_proceso') }}" class="boton boton-principal">Generar el proceso</a>
+        <a href="{{ url_for('polizas.exportar_excel') }}" class="boton boton-excel">Exportar Excel nuevo</a>
+        <a href="{{ url_for('polizas.descargar_avisos') }}" class="boton boton-avisos">Exportar avisos (.zip)</a>
+    </div>
+
     <!-- Tarjetas de contadores -->
     <div class="tarjetas">
         <div class="tarjeta vigente">
@@ -17,11 +28,6 @@
             <span class="numero">{{ conteo.get('Vencida', 0) }}</span>
             <span class="etiqueta">Vencidas</span>
         </div>
-    </div>
-
-    <!-- Botón descargar avisos -->
-    <div class="accion">
-        <a href="{{ url_for('polizas.descargar_avisos') }}" class="boton-descargar">Descargar todos los avisos (.zip)</a>
     </div>
 
     <!-- Panel primas por aseguradora -->

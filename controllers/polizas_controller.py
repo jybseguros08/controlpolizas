@@ -17,16 +17,16 @@ from models.polizas import (
     FECHA_CORTE,
 )
 from services.generador_aviso import crear_aviso_pdf
+from services.generador_excel import crear_excel_resultados
 
 # variable tipo Blueprint de Flask
 polizas_bp = Blueprint("polizas", __name__)
 
 
-@polizas_bp.route("/")
-def inicio():
+def _datos_tablero():
     """
-    Ruta "/" tablero: muestra resultados, conteo, primas por aseguradora,
-    inconsistencias y fecha de corte.
+    Pide al modelo todos los datos que necesita el tablero.
+    Devuelve una tupla con resultados, conteo, primas e inconsistencias.
     """
     # variable tipo lista: resultados del modelo
     resultados = calcular_resultados()
@@ -36,6 +36,16 @@ def inicio():
     primas = primas_por_aseguradora(resultados)
     # variable tipo lista: inconsistencias
     inconsistencias = buscar_inconsistencias(resultados)
+    return resultados, conteo, primas, inconsistencias
+
+
+@polizas_bp.route("/")
+def inicio():
+    """
+    Ruta "/" tablero: muestra resultados, conteo, primas por aseguradora,
+    inconsistencias y fecha de corte.
+    """
+    resultados, conteo, primas, inconsistencias = _datos_tablero()
 
     return render_template(
         "inicio.html",
@@ -44,7 +54,58 @@ def inicio():
         primas=primas,
         inconsistencias=inconsistencias,
         fecha_corte=FECHA_CORTE,
+        mensaje=None,
     )
+
+
+@polizas_bp.route("/generar-proceso")
+def generar_proceso():
+    """
+    Ruta "/generar-proceso": vuelve a leer el Excel y los PDF, recalcula todo
+    y muestra el tablero con un mensaje de resumen del proceso.
+    """
+    resultados, conteo, primas, inconsistencias = _datos_tablero()
+
+    # variable tipo string: resumen que se muestra arriba del tablero
+    mensaje = (
+        f"Proceso ejecutado: {len(resultados)} pólizas leídas · "
+        f"{conteo.get('Vigente', 0)} vigentes · "
+        f"{conteo.get('Por vencer', 0)} por vencer · "
+        f"{conteo.get('Vencida', 0)} vencidas · "
+        f"{len(inconsistencias)} inconsistencias."
+    )
+
+    return render_template(
+        "inicio.html",
+        resultados=resultados,
+        conteo=conteo,
+        primas=primas,
+        inconsistencias=inconsistencias,
+        fecha_corte=FECHA_CORTE,
+        mensaje=mensaje,
+    )
+
+
+@polizas_bp.route("/exportar-excel")
+def exportar_excel():
+    """
+    Ruta "/exportar-excel": genera un Excel nuevo con 3 hojas
+    (Resumen, Pólizas, Inconsistencias) y lo descarga.
+    """
+    resultados, conteo, primas, inconsistencias = _datos_tablero()
+
+    # variable tipo bytes: archivo Excel generado por el servicio
+    excel_bytes = crear_excel_resultados(
+        resultados, conteo, primas, inconsistencias, FECHA_CORTE
+    )
+
+    return send_file(
+        BytesIO(excel_bytes),
+        mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        download_name="control_polizas.xlsx",
+        as_attachment=True,
+    )
+
 
 
 @polizas_bp.route("/aviso/<numero>")

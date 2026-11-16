@@ -125,26 +125,68 @@ body {
     opacity: 0.95;
 }
 
-/* Botón descargar */
-.accion {
+/* Barra de acciones: 3 botones */
+.barra-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
     margin-bottom: 1.5rem;
 }
 
-.boton-descargar {
+.boton {
     display: inline-block;
-    background-color: var(--rojo);
-    color: var(--blanco);
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem 1.25rem;
     border-radius: 6px;
     text-decoration: none;
     font-weight: bold;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    border: 2px solid transparent;
+    text-align: center;
+    transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.boton-descargar:hover {
+/* Botón principal: rojo lleno */
+.boton-principal {
+    background-color: var(--rojo);
+    color: var(--blanco);
+}
+
+.boton-principal:hover {
     background-color: #8a1400;
+}
+
+/* Botón Excel: negro lleno */
+.boton-excel {
+    background-color: var(--negro);
+    color: var(--blanco);
+}
+
+.boton-excel:hover {
+    background-color: #000000;
+}
+
+/* Botón avisos: borde negro sobre blanco */
+.boton-avisos {
+    background-color: var(--blanco);
+    color: var(--negro);
+    border-color: var(--negro);
+}
+
+.boton-avisos:hover {
+    background-color: var(--negro);
+    color: var(--blanco);
+}
+
+/* Mensaje de éxito del proceso */
+.aviso-exito {
+    background-color: var(--verde-claro);
+    border-left: 5px solid var(--verde);
+    color: #1b5e20;
+    padding: 0.9rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.25rem;
+    font-size: 0.95rem;
+    font-weight: bold;
 }
 
 /* Paneles */
@@ -319,9 +361,12 @@ body {
         min-width: auto;
     }
 
-    .boton-descargar {
+    .barra-acciones {
+        flex-direction: column;
+    }
+
+    .boton {
         width: 100%;
-        text-align: center;
         padding: 1rem;
     }
 }
