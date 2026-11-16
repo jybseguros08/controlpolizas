@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página no encontrada</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+    <div class="contenedor">
+        <h1>404 - Página no encontrada</h1>
+        <p>La póliza solicitada no existe o está vigente y no tiene aviso de renovación.</p>
+        <a href="{{ url_for('polizas.inicio') }}">Volver al tablero</a>
+    </div>
+</body>
+</html>

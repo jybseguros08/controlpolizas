@@ -1,0 +1,23 @@
+[project]
+name = "insumos-control-polizas"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "jybseguros08", email = "jybseguros@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "flask>=3.1.3",
+    "fpdf2>=2.9.0",
+    "openpyxl>=3.1.5",
+    "pandas>=3.1.1",
+    "pdfplumber>=0.11.10",
+]
+
+[project.scripts]
+insumos-control-polizas = "insumos_control_polizas:main"
+
+[build-system]
+requires = ["uv_build>=0.13.8,<0.14.0"]
+build-backend = "uv_build"

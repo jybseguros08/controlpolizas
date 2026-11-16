@@ -1,0 +1,327 @@
+/* Capa: public/static - diseño de la app control-polizas */
+/* Colores: rojo #AE1800, negro #201E1D, gris claro #F3F2F2 */
+
+/* Variables */
+:root {
+    --rojo: #AE1800;
+    --rojo-claro: #fdecea;
+    --negro: #201E1D;
+    --gris-claro: #F3F2F2;
+    --gris-texto: #555555;
+    --verde: #2e7d32;
+    --verde-claro: #e8f5e9;
+    --ambar: #f9a825;
+    --ambar-claro: #fff8e1;
+    --blanco: #ffffff;
+}
+
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: var(--gris-claro);
+    color: var(--negro);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cabecera roja */
+.cabecera {
+    background-color: var(--rojo);
+    color: var(--blanco);
+    padding: 1.5rem 1rem;
+    border-bottom: 4px solid var(--negro);
+}
+
+.cabecera-contenido {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cabecera h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.fecha-corte {
+    font-size: 0.95rem;
+    opacity: 0.95;
+}
+
+/* Contenido principal */
+.contenido {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    width: 100%;
+}
+
+.contenedor {
+    background-color: var(--blanco);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Pie de página */
+.pie {
+    background-color: var(--negro);
+    color: var(--blanco);
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.85rem;
+    opacity: 0.85;
+}
+
+/* Tarjetas de contadores */
+.tarjetas {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.tarjeta {
+    flex: 1;
+    min-width: 120px;
+    padding: 1rem;
+    border-radius: 6px;
+    color: var(--blanco);
+    text-align: center;
+}
+
+.tarjeta.vigente {
+    background-color: var(--verde);
+}
+
+.tarjeta.por-vencer {
+    background-color: var(--ambar);
+}
+
+.tarjeta.vencida {
+    background-color: var(--rojo);
+}
+
+.tarjeta .numero {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.tarjeta .etiqueta {
+    font-size: 0.9rem;
+    opacity: 0.95;
+}
+
+/* Botón descargar */
+.accion {
+    margin-bottom: 1.5rem;
+}
+
+.boton-descargar {
+    display: inline-block;
+    background-color: var(--rojo);
+    color: var(--blanco);
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.boton-descargar:hover {
+    background-color: #8a1400;
+}
+
+/* Paneles */
+.panel {
+    margin-bottom: 1.5rem;
+}
+
+.panel h2 {
+    color: var(--rojo);
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    border-bottom: 2px solid var(--rojo);
+    padding-bottom: 0.25rem;
+}
+
+/* Lista primas */
+.lista-primas {
+    list-style: none;
+    background-color: var(--gris-claro);
+    padding: 1rem;
+    border-radius: 6px;
+}
+
+.lista-primas li {
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* Lista inconsistencias */
+.lista-inconsistencias {
+    list-style: none;
+    background-color: var(--rojo-claro);
+    padding: 1rem;
+    border-radius: 6px;
+    color: #7a1000;
+}
+
+.lista-inconsistencias li {
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+}
+
+/* Tabla de pólizas */
+.tabla-panel {
+    overflow-x: auto;
+}
+
+.tabla-polizas {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--blanco);
+    font-size: 0.85rem;
+}
+
+.tabla-polizas th,
+.tabla-polizas td {
+    padding: 0.6rem 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+}
+
+.tabla-polizas th {
+    background-color: var(--rojo);
+    color: var(--blanco);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.tabla-polizas tr:nth-child(even) {
+    background-color: var(--gris-claro);
+}
+
+/* Filas por estado */
+.fila-vencida {
+    background-color: var(--rojo-claro);
+}
+
+.fila-por-vencer {
+    background-color: var(--ambar-claro);
+}
+
+/* Badge de estado */
+.estado-badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--blanco);
+}
+
+.estado-vigente {
+    background-color: var(--verde);
+}
+
+.estado-por-vencer {
+    background-color: var(--ambar);
+    color: var(--negro);
+}
+
+.estado-vencida {
+    background-color: var(--rojo);
+}
+
+/* Celda aviso */
+.celda-aviso {
+    text-align: center;
+}
+
+.enlace-aviso {
+    color: var(--rojo);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.enlace-aviso:hover {
+    text-decoration: underline;
+}
+
+.sin-aviso {
+    color: var(--gris-texto);
+    font-size: 0.85rem;
+}
+
+/* Notas de inconsistencia en tabla */
+.nota-maestro {
+    font-size: 0.75rem;
+    color: #7a1000;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* ===== RESPONSIVE: celular ===== */
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+
+    .cabecera {
+        padding: 1rem;
+    }
+
+    .cabecera h1 {
+        font-size: 1.25rem;
+    }
+
+    .contenedor {
+        padding: 1rem;
+    }
+
+    .tarjetas {
+        flex-direction: column;
+    }
+
+    .tabla-polizas {
+        font-size: 0.75rem;
+    }
+
+    .tabla-polizas th,
+    .tabla-polizas td {
+        padding: 0.4rem 0.3rem;
+    }
+
+    .panel h2 {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tarjeta {
+        min-width: auto;
+    }
+
+    .boton-descargar {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+    }
+}
